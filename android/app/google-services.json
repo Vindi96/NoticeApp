@@ -1,0 +1,69 @@
+{
+  "project_info": {
+    "project_number": "66527317622",
+    "firebase_url": "https://noticeapp-9969f.firebaseio.com",
+    "project_id": "noticeapp-9969f",
+    "storage_bucket": "noticeapp-9969f.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:66527317622:android:131736263dd3ef13549957",
+        "android_client_info": {
+          "package_name": "co.appbrewery.magic8ball"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "66527317622-cusgspu2qllvo7ff93d0me7da5o9sd12.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDodvKIzVnBmEiycIsfiggPG5-Pw67H_JU"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "66527317622-cusgspu2qllvo7ff93d0me7da5o9sd12.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:66527317622:android:4ccb546a9823e50d549957",
+        "android_client_info": {
+          "package_name": "com.example.facultynoticeboard"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "66527317622-cusgspu2qllvo7ff93d0me7da5o9sd12.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDodvKIzVnBmEiycIsfiggPG5-Pw67H_JU"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "66527317622-cusgspu2qllvo7ff93d0me7da5o9sd12.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
