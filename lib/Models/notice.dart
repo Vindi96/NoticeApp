@@ -1,9 +1,11 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
+
 class Notice{
   final String title;
   final String url;
   final String category;
   final String status;
-  final String dateTime;
+  final  dateTime;
   final String noticeId;
   final String department;
 

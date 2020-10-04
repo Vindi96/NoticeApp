@@ -1,4 +1,5 @@
 import 'dart:io';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:path/path.dart';
 import 'package:facultynoticeboard/Models/model.dart';
 import 'package:facultynoticeboard/Services/auth.dart';
@@ -18,7 +19,24 @@ class _ProfilePageState extends State<ProfilePage> {
   final UserService userService =UserService();
   String name;
   File _userPic;
+  String picurl;
+  String email;
+  String uid;
   String url;
+  @override
+  void initState() {
+    
+    super.initState();
+    FirebaseAuth.instance.currentUser().then((user){
+      picurl=user.photoUrl.toString();
+      name=user.displayName.toString();
+      email=user.email.toString();
+      uid=user.uid.toString();
+    }).catchError((e){
+      print(e);
+    });
+  }
+  
   @override
   
   Widget build(BuildContext context) {
@@ -38,13 +56,13 @@ class _ProfilePageState extends State<ProfilePage> {
      StorageTaskSnapshot taskSnapshot= await uploadTask.onComplete;
     
      String downloadurl = await taskSnapshot.ref.getDownloadURL();
-     url=downloadurl.toString();}
+     url=downloadurl.toString();
+     userService.updateUrl(uid,{'url':'$url'});
+     Navigator.pop(context);
+     }
     final user = Provider.of<User>(context);
     
-    return StreamBuilder<User>(
-      stream:UserService(uid: user.uid).userData,
-      builder: (context,snapshot){
-        User userData=snapshot.data;
+    
         
 return Scaffold(
       appBar: AppBar(
@@ -68,8 +86,21 @@ return Scaffold(
                     child: Stack(
                       children: <Widget>[
                         CircleAvatar(
+                          
                           radius: 70,
-                          //child: ClipOval(child: Image.asset('images/girl.jpg', height: 150, width: 150, fit: BoxFit.cover,),),
+                        
+                          child:ClipOval(
+                        child: new SizedBox(
+                          width: 180.0,
+                          height: 180.0,
+                          child: (_userPic!=null)?Image.file(
+                            _userPic,
+                            fit: BoxFit.fill,
+                          ):Image.network(
+                            "$picurl",    fit: BoxFit.fill,
+                          ),
+                        ),
+                      ),
                         ),
                         Positioned(bottom: 1, right: 1 ,child: Container(
                           height: 40, width: 40,
@@ -79,6 +110,7 @@ return Scaffold(
                              onPressed: (){
                                getImage().then((context){
                                        uploadPic(context);
+                                       
                                      });
  
                              },
@@ -108,11 +140,11 @@ return Scaffold(
                       style: TextStyle(fontSize: 14.0, fontFamily: 'Neucha'),
                     ),
                     subtitle:Text(
-                      userData.name,
+                      '$name',
                       style: TextStyle(fontSize: 16.0, fontFamily: 'Neucha'),
                     ) ,
                     trailing: IconButton(icon: Icon(Icons.mode_edit), onPressed: (){
-                        dialogTrigger(context,userData.uid);
+                        dialogTrigger(context,uid);
                     }),
                   ),
                 ),
@@ -131,7 +163,7 @@ return Scaffold(
                       style: TextStyle(fontSize: 14.0, fontFamily: 'Neucha'),
                     ),
                     subtitle:Text(
-                      userData.email,
+                      '$email',
                       style: TextStyle(fontSize: 16.0, fontFamily: 'Neucha'),
                     ) ,
                     
@@ -149,7 +181,7 @@ return Scaffold(
       ),
       
     );
-      });
+      
    } 
   
   Future<bool>dialogTrigger(BuildContext context,docId)async{

@@ -3,12 +3,12 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
 
-class AdminDrawerpart extends StatefulWidget {
+class Drawerpart extends StatefulWidget {
   @override
-  _AdminDrawerpartState createState() => _AdminDrawerpartState();
+  _DrawerpartState createState() => _DrawerpartState();
 }
 
-class _AdminDrawerpartState extends State<AdminDrawerpart> {
+class _DrawerpartState extends State<Drawerpart> {
   Widget useremail(){
      return FutureBuilder(
           builder: (context, AsyncSnapshot<FirebaseUser> snapshot) {
@@ -97,11 +97,9 @@ class _AdminDrawerpartState extends State<AdminDrawerpart> {
                     color:Colors.blue[800]
                   ),
               ),
-              tabs(icon:Icon(Icons.home),name:'Home Page'),
+              tabs(icon:Icon(Icons.home),name:'StudentHome'),
               tabs(icon:Icon(Icons.account_circle),name:'My Account'),
               tabs(icon:Icon(Icons.developer_board),name:'View Notices'),
-              tabs(icon:Icon(Icons.file_upload),name:'Upload Notices'),
-              tabs(icon:Icon(Icons.check),name:'Approve Notice'),
               tabs(icon:Icon(Icons.settings),name:'Settings'),
              // tabs(icon:Icon(Icons.help),name:'About'),
               InkWell(

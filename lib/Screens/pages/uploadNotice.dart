@@ -1,6 +1,5 @@
 
 import 'package:facultynoticeboard/Models/model.dart';
-import 'package:facultynoticeboard/Screens/components/Drawers/drawer.dart';
 import 'package:facultynoticeboard/Shared/loading.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
@@ -18,15 +17,16 @@ class UploadNotice extends StatefulWidget {
 
 class _UploadNoticeState extends State<UploadNotice> {
   final _formKey=GlobalKey<FormState>();
-  final List<String> noticrcategory=['CIS','NR','FST','PST','Sport','General'];
+  final List<String> noticrcategory=['Exams','Mahapola/Bursary','TimeTables','Results','Other','General'];
   File _noticepic;
   String title; 
   String url;
   String category;
-  String dateTime;
+  String department;
   var uuid=Uuid();
   bool loading = false;
   DateTime now=new DateTime.now();
+  
   
   
 
@@ -53,14 +53,21 @@ class _UploadNoticeState extends State<UploadNotice> {
     }
     final user = Provider.of<User>(context);
     
-    return StreamBuilder(
+  return StreamBuilder(
       stream:UserService(uid: user.uid).userData,
       builder: (context,snapshot){
-        User userData=snapshot.data;
-       String getDepartmentName(){
+        if(snapshot.hasData){
+          User userData=snapshot.data;
+          userData.department.toString();
+          print(userData.department.toString());
+          String getDepartmentName(){
         return userData.department.toString();  
         }
-        String department=getDepartmentName();
+        department=getDepartmentName();
+        
+        
+       
+        
         
     return loading ? Loading(): Scaffold(
         appBar: AppBar(
@@ -76,7 +83,7 @@ class _UploadNoticeState extends State<UploadNotice> {
          
 
        ),
-      // drawer: Drawerpart(),
+  
        body:SingleChildScrollView(
               child: Padding(
                 padding: const EdgeInsets.all(8.0),
@@ -94,29 +101,20 @@ class _UploadNoticeState extends State<UploadNotice> {
                         ),
                         Container(
                         child:(_noticepic!=null)?Image.file(_noticepic,fit: BoxFit.fill):
-                        Image.asset('',),  
+                        IconButton(icon:Icon(Icons.add_photo_alternate,size: 50.0,),
+                        onPressed:(){
+                                     getImage().then((context){
+                                       uploadPic(context);
+                                     });
+
+                                   },
+                        
+                        ),
                         height: 450.0,
                         width:300.0,
                         color: Colors.grey[400],
                         
                         ),
-                           Padding(
-                             padding: const EdgeInsets.only(left: 280),
-                             child: Container(
-                                
-                                child: IconButton(
-                                  icon: Icon(Icons.add_photo_alternate),
-                                  color: Colors.grey[700],
-                                  iconSize: 40,
-                                   onPressed:(){
-                                     getImage().then((context){
-                                       uploadPic(context);
-                                     });
-
-                                   }
-                                   ),
-                              ),
-                           ), 
                   TextFormField(
                             decoration: new InputDecoration(labelText: 'Title'),
                             
@@ -139,7 +137,8 @@ class _UploadNoticeState extends State<UploadNotice> {
                         onChanged: (value)=>setState(()=>category=value),
 
                       ),
-                       Text(DateTime.now().toString()),
+                      SizedBox(height: 20,),
+                      Text('${now.day}/${now.month}/${now.year}  (${now.hour}:${now.minute}:${now.second})'),
                       SizedBox(height: 30.0,),
                     
                     Container(
@@ -154,8 +153,8 @@ class _UploadNoticeState extends State<UploadNotice> {
                           url, 
                           category,
                           'unapproved',     
-                          DateTime.now().toString(),
-                          '$department',
+                           now,
+                         '$department',
                           uuid.v4());
                         Navigator.of(context).pushReplacementNamed('/Upload Notices');
                         },
@@ -176,6 +175,10 @@ class _UploadNoticeState extends State<UploadNotice> {
       
       
     );
+    }else if(snapshot.hasError){
+          return Text("${snapshot.error}");
+        }
+        return CircularProgressIndicator();
 
       }
     );

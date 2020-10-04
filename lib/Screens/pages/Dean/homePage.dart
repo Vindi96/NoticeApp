@@ -1,4 +1,5 @@
-import 'package:facultynoticeboard/Screens/components/Drawers/drawer.dart';
+import 'package:facultynoticeboard/Screens/components/Drawers/deanDrawer.dart';
+import 'package:facultynoticeboard/Screens/pages/generalnotice.dart';
 import 'package:flutter/material.dart';
 import 'package:carousel_pro/carousel_pro.dart';
 import 'package:facultynoticeboard/Screens/components/horisontal_listview.dart';
@@ -51,21 +52,13 @@ import 'package:facultynoticeboard/Screens/components/horisontal_listview.dart';
          ],
 
        ),
-       drawer:Drawerpart(),
+       drawer:AdminDrawerpart(),
        body: ListView(
          children:<Widget>[
            imageCarousel,
-           Padding(padding:const EdgeInsets.all(10.0),
-           child:Text('Departments',style:TextStyle(
-             fontSize: 15.0,
-             color: Colors.blue[700],
-             fontFamily: 'montserrat',
-             fontWeight: FontWeight.bold
-             ),
-             
-             ),           
-           ),
-           HorizontalList(),
+                     
+           
+           
            Padding(padding: const EdgeInsets.all(10.0),
            child:Text('Recent',style:TextStyle(
              fontSize: 15.0,
@@ -76,10 +69,10 @@ import 'package:facultynoticeboard/Screens/components/horisontal_listview.dart';
              
              ),           
            ),
-           /*Container(
+           Container(
              height: 320,
-             child: RecentNotice(),
-           )*/
+             child: GeneralNotice(),
+           )
          ]
        ),
      );

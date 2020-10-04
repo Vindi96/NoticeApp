@@ -9,9 +9,10 @@ class SingleNotice extends StatelessWidget {
     this.notice
   });
   final NoticeService noticeServices=NoticeService();
+  
   @override
   Widget build(BuildContext context) {
-   
+   DateTime uploadedDateTime=notice.dateTime;
         return Card(
           child: Hero(
             tag: notice.title,
@@ -33,7 +34,7 @@ class SingleNotice extends StatelessWidget {
                       children: <Widget>[
                         ListTile(
                           title: Text(notice.title,style: TextStyle(fontWeight: FontWeight.bold),),
-                          subtitle: Text(notice.dateTime,),
+                          subtitle: Text('${uploadedDateTime.day}/${uploadedDateTime.month}/${uploadedDateTime.year}  (${uploadedDateTime.hour}:${uploadedDateTime.minute}:${uploadedDateTime.second})',),
                         ),
                         Row(
                           children: <Widget>[

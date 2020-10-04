@@ -1,7 +1,9 @@
-import 'package:facultynoticeboard/Screens/components/Drawers/drawer.dart';
+import 'package:facultynoticeboard/Screens/components/Drawers/studentDrawer.dart';
 import 'package:flutter/material.dart';
 import 'package:carousel_pro/carousel_pro.dart';
 import 'package:facultynoticeboard/Screens/components/horisontal_listview.dart';
+
+import '../generalnotice.dart';
 
  class StudentHomePage extends StatefulWidget {
    
@@ -76,10 +78,10 @@ import 'package:facultynoticeboard/Screens/components/horisontal_listview.dart';
              
              ),           
            ),
-           /*Container(
+           Container(
              height: 320,
-             child: RecentNotice(),
-           )*/
+             child: GeneralNotice(),
+           )
          ]
        ),
      );

@@ -1,9 +1,11 @@
 import 'package:carousel_pro/carousel_pro.dart';
-import 'package:facultynoticeboard/Screens/components/Drawers/adminDrawer.dart';
+import 'package:facultynoticeboard/Screens/components/Drawers/hodDrawer.dart';
 import 'package:facultynoticeboard/Screens/components/horisontal_listview.dart';
 
 
 import 'package:flutter/material.dart';
+
+import '../generalnotice.dart';
 
 class HodHomePage extends StatefulWidget {
   @override
@@ -53,7 +55,7 @@ class _HodHomePageState extends State<HodHomePage> {
          ], 
         
       ),
-      drawer:AdminDrawerpart(),
+      drawer:HODDrawerpart(),
       body: ListView(
         children: <Widget>[
           imageCarousel,
@@ -78,10 +80,10 @@ class _HodHomePageState extends State<HodHomePage> {
              
              ),           
            ),
-          /* Container(
+          Container(
              height: 320,
-            // child: UnApprovedNotices(),
-           )*/
+            child: GeneralNotice(),
+           )
           
 
         ],

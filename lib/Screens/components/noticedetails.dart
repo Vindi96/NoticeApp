@@ -3,11 +3,11 @@ import 'package:flutter/material.dart';
 class NoticeDetails extends StatefulWidget {
   final noticeDetailTitle;
   final noticeDetailImage;
- // final noticeDetailDate;
+  final noticeDetailDate;
 
   NoticeDetails({
     this.noticeDetailTitle,
-   // this.noticeDetailDate,
+   this.noticeDetailDate,
     this.noticeDetailImage
 
   });

@@ -3,12 +3,12 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
 
-class Drawerpart extends StatefulWidget {
+class LectureDrawerpart extends StatefulWidget {
   @override
-  _DrawerpartState createState() => _DrawerpartState();
+  _LectureDrawerpartState createState() => _LectureDrawerpartState();
 }
 
-class _DrawerpartState extends State<Drawerpart> {
+class _LectureDrawerpartState extends State<LectureDrawerpart> {
   Widget useremail(){
      return FutureBuilder(
           builder: (context, AsyncSnapshot<FirebaseUser> snapshot) {
@@ -97,7 +97,7 @@ class _DrawerpartState extends State<Drawerpart> {
                     color:Colors.blue[800]
                   ),
               ),
-              tabs(icon:Icon(Icons.home),name:'Home'),
+              tabs(icon:Icon(Icons.home),name:'LectureHome'),
               tabs(icon:Icon(Icons.account_circle),name:'My Account'),
               tabs(icon:Icon(Icons.developer_board),name:'View Notices'),
               tabs(icon:Icon(Icons.file_upload),name:'Upload Notices'),

@@ -24,21 +24,29 @@ class _WrapperPageState extends State<WrapperPage> {
      return StreamBuilder<User>(
       stream: UserService(uid: user.uid).userData,
       builder: (context,snapshot){
-        if(snapshot.hasData){
-          User userData=snapshot.data;
-          if(userData.category=='HOD'){
-            return HodHomePage();
-          }else if(userData.category=='Dean'){
-            return DeanHomePage();
-          }else if(userData.category=='Lecture'){
-            return LectureHomePage();
-          }else{
-            return StudentHomePage();
-          }
+        if(snapshot.hasError){
+          return ErrorWidget(snapshot.error);
 
         }else{
-          return Text('loading');
+            if(snapshot.connectionState==ConnectionState.waiting){
+               return Center(child: CircularProgressIndicator(),);
+            }else if(snapshot.hasData){
+                User userData=snapshot.data;
+                 if(userData.category=='HOD'){
+                    return HodHomePage();
+                }else if(userData.category=='Dean'){
+                    return DeanHomePage();
+                }else if(userData.category=='Lecture'){
+                    return LectureHomePage();
+                }else{
+                    return StudentHomePage();
+                }
+
+            }else{
+               return Text('loading');
+            }
         }
+        
       }
       
     );

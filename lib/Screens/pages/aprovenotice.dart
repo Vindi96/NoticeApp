@@ -1,3 +1,4 @@
+
 import 'package:facultynoticeboard/Models/model.dart';
 import 'package:facultynoticeboard/Models/notice.dart';
 import 'package:facultynoticeboard/Screens/components/unapprovednotices.dart';
@@ -11,10 +12,11 @@ class AproveNotice extends StatelessWidget {
     return StreamBuilder(
        stream:UserService(uid: user.uid).userData,
       builder: (context,snapshot){
+        if(snapshot.hasData){
         User userData=snapshot.data;
         Stream getdept(){
-            if(userData.department=='All'){
-            return NoticeService().unapprovedgeneralnotices;
+            if(userData.department=='all'){
+            return NoticeService().unapprovedfacultynotices;
           }else{
           if(userData.department=='fst'){
             return NoticeService().unapprovedfstnotices;
@@ -28,36 +30,40 @@ class AproveNotice extends StatelessWidget {
             return NoticeService().unapprovednrnotices;
           }
           }
-
+        
         }
-     return StreamProvider<List<Notice>>.value(
-      value: getdept(), 
+        return StreamProvider<List<Notice>>.value(
+      value: getdept(),
       child: Scaffold(
-      appBar: AppBar(
-        elevation: 0.0,
-       title: Text('Aprove Notices',
-       style: TextStyle(
-         fontFamily: 'Montserrat',
-         fontWeight: FontWeight.bold,
-         color: Colors.white,
-       ),
-       ),
-       backgroundColor: Colors.blue[800],
-       actions: <Widget>[
-         IconButton(
-           icon: Icon(Icons.search, color: Colors.white,), 
-           onPressed: (){}
-           ),
-           
-       ], 
+        appBar: AppBar(
+          elevation: 0.0,
+         title: Text('Aprove Notices',
+         style: TextStyle(
+           fontFamily: 'Montserrat',
+           fontWeight: FontWeight.bold,
+           color: Colors.white,
+         ),
+         ),
+         backgroundColor: Colors.blue[800],
+         actions: <Widget>[
+           IconButton(
+             icon: Icon(Icons.search, color: Colors.white,), 
+             onPressed: (){}
+             ),
+             
+         ], 
+        ),
+      body:UnApprovedNotices() ,
+
       ),
       
-    
-    body:UnApprovedNotices() ,
+    );
+        }else if(snapshot.hasError){
+          return Text('${snapshot.error}');
 
-    )
-    );
-    }
-    );
-  }
-}
+        }
+        return CircularProgressIndicator();
+      });
+
+    
+  }}

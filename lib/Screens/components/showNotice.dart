@@ -8,9 +8,12 @@ class ShowNotice extends StatelessWidget {
   ShowNotice({
     this.notice
   });
+ 
   final NoticeService noticeServices=NoticeService();
+
   @override
   Widget build(BuildContext context) {
+    DateTime uploadedDateTime=notice.dateTime;
    
         return Card(
           child: Hero(
@@ -21,7 +24,7 @@ class ShowNotice extends StatelessWidget {
                   Navigator.of(context).push(
                     MaterialPageRoute(builder: (context)=>NoticeDetails(
                       noticeDetailTitle: notice.title,
-                      //noticeDetailDate: notice.date,
+                      noticeDetailDate: notice.dateTime,
                       noticeDetailImage: notice.url,
                     )));
                 },
@@ -32,9 +35,10 @@ class ShowNotice extends StatelessWidget {
                     child: Column(
                       children: <Widget>[
                         ListTile(
-                          title: Text(notice.title,style: TextStyle(fontWeight: FontWeight.bold),),
-                          subtitle: Text(notice.dateTime,),
-                        ),
+                         title: Text(notice.title,style: TextStyle(fontWeight: FontWeight.bold),),
+                         subtitle: Text('${uploadedDateTime.day}/${uploadedDateTime.month}/${uploadedDateTime.year}  (${uploadedDateTime.hour}:${uploadedDateTime.minute}:${uploadedDateTime.second})',),
+                         
+                       ),
                         Row(
                           children: <Widget>[
                             SizedBox(width: 20,),
@@ -67,6 +71,7 @@ class ShowNotice extends StatelessWidget {
         );
      
   }
+  
 
    Future<bool>deleteDialog(BuildContext context,docId)async{
     return showDialog(

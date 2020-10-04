@@ -2,7 +2,7 @@ import 'package:facultynoticeboard/Models/model.dart';
 import 'package:facultynoticeboard/Screens/authenticate/regester.dart';
 import 'package:facultynoticeboard/Screens/authenticate/sign_in.dart';
 import 'package:facultynoticeboard/Screens/pages/HOD/homePage.dart';
-import 'package:facultynoticeboard/Screens/pages/HOD/aprovenotice.dart';
+import 'package:facultynoticeboard/Screens/pages/aprovenotice.dart';
 import 'package:facultynoticeboard/Screens/pages/userprofile.dart';
 import 'package:facultynoticeboard/Services/auth.dart';
 import 'package:flutter/material.dart';
@@ -31,14 +31,13 @@ class MyApp extends StatelessWidget {
           
           '/login': (BuildContext context) => new SignIn(),
           '/signup': (BuildContext context) => new Regester(),
-          '/DHome':(BuildContext context)=>new DeanHomePage(),
-          '/LHome':(BuildContext context)=>new LectureHomePage(),
-          '/SHome':(BuildContext context)=>new StudentHomePage(),
+          '/DeanHome':(BuildContext context)=>new DeanHomePage(),
+          '/LectureHome':(BuildContext context)=>new LectureHomePage(),
+          '/StudentHome':(BuildContext context)=>new StudentHomePage(),
           '/Upload Notices':(BuildContext context)=>new UploadNotice(),
           '/Approve Notice':(BuildContext context)=>new AproveNotice(),
           '/My Account':(BuildContext context)=>new ProfilePage(),
-          '/HHome Page':(BuildContext context)=>new HodHomePage(),
-          
+          '/HODHome':(BuildContext context)=>new HodHomePage(),
           '/View Notices':(BuildContext context)=>new ViewNotice(),
          
           

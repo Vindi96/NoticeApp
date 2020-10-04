@@ -13,7 +13,7 @@ class NoticeData{
   final String url;
   final String category;
   final String status;
-  final String dateTime;
+  final DateTime dateTime;
   final String noticeId;
   final String department;
 

@@ -4,7 +4,7 @@ import 'package:facultynoticeboard/Screens/components/noticeList/noticeList.dart
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:facultynoticeboard/Services/db.dart';
-class ViewNotice extends StatelessWidget {
+class GeneralNotice extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final user = Provider.of<User>(context);
@@ -34,24 +34,7 @@ class ViewNotice extends StatelessWidget {
         return StreamProvider<List<Notice>>.value(
       value: getdept(),
       child: Scaffold(
-        appBar: AppBar(
-          elevation: 0.0,
-         title: Text('Notices',
-         style: TextStyle(
-           fontFamily: 'Montserrat',
-           fontWeight: FontWeight.bold,
-           color: Colors.white,
-         ),
-         ),
-         backgroundColor: Colors.blue[800],
-         actions: <Widget>[
-           IconButton(
-             icon: Icon(Icons.search, color: Colors.white,), 
-             onPressed: (){}
-             ),
-             
-         ], 
-        ),
+        
       body:NoticeList() ,
 
       ),

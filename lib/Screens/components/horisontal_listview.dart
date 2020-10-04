@@ -30,14 +30,14 @@ class Departments extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    void navigateTo(String name){
-     Navigator.of(context).pushNamed('/$deptname');
+    void navigateTo(){
+     Navigator.of(context).pushNamed('/Approve Notice');
    }
     return Padding(
      padding: const EdgeInsets.all(2.0),
      child: SizedBox(
          child: RaisedButton(
-         onPressed: (){navigateTo(deptname);},
+         onPressed: (){navigateTo();},
          child: Text(deptname),
          color:color,
          ),
