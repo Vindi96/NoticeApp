@@ -17,7 +17,7 @@ class UploadNotice extends StatefulWidget {
 
 class _UploadNoticeState extends State<UploadNotice> {
   final _formKey=GlobalKey<FormState>();
-  final List<String> noticrcategory=['Exams','Mahapola/Bursary','TimeTables','Results','Other','General'];
+  final List<String> noticrcategory=['Exams','Mahapola/Bursary','TimeTables','Results','Other'];
   File _noticepic;
   String title; 
   String url;
@@ -127,7 +127,7 @@ class _UploadNoticeState extends State<UploadNotice> {
                             
                      
                   DropdownButtonFormField(
-                        value: category ?? 'General',
+                        value: category ?? 'Other',
                         items: noticrcategory.map((noticrcategory){
                           return DropdownMenuItem(
                             value: noticrcategory,

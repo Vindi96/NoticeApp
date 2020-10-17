@@ -1,6 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:facultynoticeboard/Models/model.dart';
 import 'package:facultynoticeboard/Models/notice.dart';
+import 'package:facultynoticeboard/Screens/components/unapprovednotices.dart';
 
 class UserService{
   
@@ -93,10 +94,10 @@ class NoticeService{
 
   final CollectionReference noticeCollection=Firestore.instance.collection('Notices');
 
+
   //unapproved notices
   final Query unapprovedcis = Firestore.instance.collection('Notices')
-  .where("status", isEqualTo: "unapproved").where('department',isEqualTo: 'cis')
-  .orderBy("dateTime",descending:true);
+  .where("status", isEqualTo: "unapproved").where('department',isEqualTo: 'cis').orderBy("dateTime",descending:true);
   final Query unapprovednr = Firestore.instance.collection('Notices')
   .where("status", isEqualTo: "unapproved").where('department',isEqualTo: 'nr');
   final Query unapprovedsport = Firestore.instance.collection('Notices')
@@ -108,32 +109,126 @@ class NoticeService{
   final Query unapprovedgeneral = Firestore.instance.collection('Notices')
   .where("status", isEqualTo: "unapproved").where('department',isEqualTo: 'all');    
 
+
   //approved notices
   final Query cis = Firestore.instance.collection('Notices')
   .where("status",isEqualTo:"approved").where('department',isEqualTo:'cis')
   .orderBy("dateTime",descending:true);
   final Query nr = Firestore.instance.collection('Notices')
-  .where("status",isEqualTo:"approved").where('noticecategory',isEqualTo:'NR')
-   .where("noticecategory",isEqualTo: 'General')
+  .where("status",isEqualTo:"approved").where('department',isEqualTo:'nr')
   .orderBy("dateTime",descending:true);
   final Query sport = Firestore.instance.collection('Notices')
-  .where("status",isEqualTo:"approved").where('noticecategory',isEqualTo:'Sport')
-   .where("noticecategory",isEqualTo: 'General')
+  .where("status",isEqualTo:"approved").where('department',isEqualTo:'sport')
   .orderBy("dateTime",descending:true);
   final Query pst = Firestore.instance.collection('Notices')
-  .where("status",isEqualTo:"approved").where('noticecategory',isEqualTo:'PST')
-   .where("noticecategory",isEqualTo: 'General')
+  .where("status",isEqualTo:"approved").where('department',isEqualTo:'pst')
   .orderBy("dateTime",descending:true);
   final Query fst = Firestore.instance.collection('Notices')
-  .where("status",isEqualTo:"approved").where('noticecategory',isEqualTo:'FST')
-   .where("noticecategory",isEqualTo: 'General')
+  .where("status",isEqualTo:"approved").where('department',isEqualTo:'fst')
   .orderBy("dateTime",descending:true);
-  final Query general = Firestore.instance.collection('Notices')
-  .where("status",isEqualTo:"approved").where('noticecategory',isEqualTo:'General')
-  .orderBy('dateTime',descending:false);
-   final Query all = Firestore.instance.collection('Notices')
-  .where("status",isEqualTo:"approved").orderBy('dateTime',descending:false);
+  final Query all = Firestore.instance.collection('Notices')
+  .where("status",isEqualTo:"approved").where('department',isEqualTo:'all')
+  .orderBy("dateTime",descending:true);
+
+  //cis categories
+  final Query cisexams = Firestore.instance.collection('Notices')
+  .where("status",isEqualTo:"approved").where('department',isEqualTo:'cis').where('noticecategory', isEqualTo: 'Exams')
+  .orderBy("dateTime",descending:true);
+  final Query cisMB = Firestore.instance.collection('Notices')
+  .where("status",isEqualTo:"approved").where('department',isEqualTo:'cis').where('noticecategory', isEqualTo: 'Mahapola/Bursary')
+  .orderBy("dateTime",descending:true);
+  final Query cistimetables = Firestore.instance.collection('Notices')
+  .where("status",isEqualTo:"approved").where('department',isEqualTo:'cis').where('noticecategory', isEqualTo: 'TimeTables')
+  .orderBy("dateTime",descending:true);
+  final Query cisresults = Firestore.instance.collection('Notices')
+  .where("status",isEqualTo:"approved").where('department',isEqualTo:'cis').where('noticecategory', isEqualTo: 'Results')
+  .orderBy("dateTime",descending:true);
+  final Query cisother = Firestore.instance.collection('Notices')
+  .where("status",isEqualTo:"approved").where('department',isEqualTo:'cis').where('noticecategory', isEqualTo: 'Other')
+  .orderBy("dateTime",descending:true);
   
+
+  //fst categories
+  final Query fstexams = Firestore.instance.collection('Notices')
+  .where("status",isEqualTo:"approved").where('department',isEqualTo:'fst').where('noticecategory', isEqualTo: 'Exams')
+  .orderBy("dateTime",descending:true);
+  final Query fstMB = Firestore.instance.collection('Notices')
+  .where("status",isEqualTo:"approved").where('department',isEqualTo:'fst').where('noticecategory', isEqualTo: 'Mahapola/Bursary')
+  .orderBy("dateTime",descending:true);
+  final Query fsttimetables = Firestore.instance.collection('Notices')
+  .where("status",isEqualTo:"approved").where('department',isEqualTo:'fst').where('noticecategory', isEqualTo: 'TimeTables')
+  .orderBy("dateTime",descending:true);
+  final Query fstresults = Firestore.instance.collection('Notices')
+  .where("status",isEqualTo:"approved").where('department',isEqualTo:'fst').where('noticecategory', isEqualTo: 'Results')
+  .orderBy("dateTime",descending:true);
+  final Query fstother = Firestore.instance.collection('Notices')
+  .where("status",isEqualTo:"approved").where('department',isEqualTo:'fst').where('noticecategory', isEqualTo: 'Other')
+  .orderBy("dateTime",descending:true);
+  //nr categories
+  final Query nrexams = Firestore.instance.collection('Notices')
+  .where("status",isEqualTo:"approved").where('department',isEqualTo:'nr').where('noticecategory', isEqualTo: 'Exams')
+  .orderBy("dateTime",descending:true);
+  final Query nrMB = Firestore.instance.collection('Notices')
+  .where("status",isEqualTo:"approved").where('department',isEqualTo:'nr').where('noticecategory', isEqualTo: 'Mahapola/Bursary')
+  .orderBy("dateTime",descending:true);
+  final Query nrtimetables = Firestore.instance.collection('Notices')
+  .where("status",isEqualTo:"approved").where('department',isEqualTo:'nr').where('noticecategory', isEqualTo: 'TimeTables')
+  .orderBy("dateTime",descending:true);
+  final Query nrresults = Firestore.instance.collection('Notices')
+  .where("status",isEqualTo:"approved").where('department',isEqualTo:'nr').where('noticecategory', isEqualTo: 'Results')
+  .orderBy("dateTime",descending:true);
+  final Query nrother = Firestore.instance.collection('Notices')
+  .where("status",isEqualTo:"approved").where('department',isEqualTo:'nr').where('noticecategory', isEqualTo: 'Other')
+  .orderBy("dateTime",descending:true);
+  //sport categories
+  final Query sportexams = Firestore.instance.collection('Notices')
+  .where("status",isEqualTo:"approved").where('department',isEqualTo:'sport').where('noticecategory', isEqualTo: 'Exams')
+  .orderBy("dateTime",descending:true);
+  final Query sportMB = Firestore.instance.collection('Notices')
+  .where("status",isEqualTo:"approved").where('department',isEqualTo:'sport').where('noticecategory', isEqualTo: 'Mahapola/Bursary')
+  .orderBy("dateTime",descending:true);
+  final Query sporttimetables = Firestore.instance.collection('Notices')
+  .where("status",isEqualTo:"approved").where('department',isEqualTo:'sport').where('noticecategory', isEqualTo: 'TimeTables')
+  .orderBy("dateTime",descending:true);
+  final Query sportresults = Firestore.instance.collection('Notices')
+  .where("status",isEqualTo:"approved").where('department',isEqualTo:'sport').where('noticecategory', isEqualTo: 'Results')
+  .orderBy("dateTime",descending:true);
+  final Query sportother = Firestore.instance.collection('Notices')
+  .where("status",isEqualTo:"approved").where('department',isEqualTo:'sport').where('noticecategory', isEqualTo: 'Other')
+  .orderBy("dateTime",descending:true);
+  //pst categories
+  final Query pstexams = Firestore.instance.collection('Notices')
+  .where("status",isEqualTo:"approved").where('department',isEqualTo:'pst').where('noticecategory', isEqualTo: 'Exams')
+  .orderBy("dateTime",descending:true);
+  final Query pstMB = Firestore.instance.collection('Notices')
+  .where("status",isEqualTo:"approved").where('department',isEqualTo:'pst').where('noticecategory', isEqualTo: 'Mahapola/Bursary')
+  .orderBy("dateTime",descending:true);
+  final Query psttimetables = Firestore.instance.collection('Notices')
+  .where("status",isEqualTo:"approved").where('department',isEqualTo:'pst').where('noticecategory', isEqualTo: 'TimeTables')
+  .orderBy("dateTime",descending:true);
+  final Query pstresults = Firestore.instance.collection('Notices')
+  .where("status",isEqualTo:"approved").where('department',isEqualTo:'pst').where('noticecategory', isEqualTo: 'Results')
+  .orderBy("dateTime",descending:true);
+  final Query pstother = Firestore.instance.collection('Notices')
+  .where("status",isEqualTo:"approved").where('department',isEqualTo:'pst').where('noticecategory', isEqualTo: 'Other')
+  .orderBy("dateTime",descending:true);
+
+  //all categories
+  final Query allexams = Firestore.instance.collection('Notices')
+  .where("status",isEqualTo:"approved").where('noticecategory', isEqualTo: 'Exams')
+  .orderBy("dateTime",descending:true);
+  final Query allMB = Firestore.instance.collection('Notices')
+  .where("status",isEqualTo:"approved").where('noticecategory', isEqualTo: 'Mahapola/Bursary')
+  .orderBy("dateTime",descending:true);
+  final Query alltimetables = Firestore.instance.collection('Notices')
+  .where("status",isEqualTo:"approved").where('noticecategory', isEqualTo: 'TimeTables')
+  .orderBy("dateTime",descending:true);
+  final Query allresults = Firestore.instance.collection('Notices')
+  .where("status",isEqualTo:"approved").where('noticecategory', isEqualTo: 'Results')
+  .orderBy("dateTime",descending:true);
+  final Query allother = Firestore.instance.collection('Notices')
+  .where("status",isEqualTo:"approved").where('noticecategory', isEqualTo: 'Other')
+  .orderBy("dateTime",descending:true);  
 
    Future updteNoticeData(
      String title,
@@ -144,6 +239,7 @@ class NoticeService{
      String department,
      String noticeId,
      )async{
+       
     return await noticeCollection.document(noticeId).setData({     
       'title':title,
       'url':url,
@@ -155,7 +251,7 @@ class NoticeService{
       
 
     });
-  }
+     }
   //notice list from snapshot
   List<Notice>_noticeListFromSnapshot(QuerySnapshot snapshot){
     return snapshot.documents.map((doc){
@@ -232,9 +328,109 @@ class NoticeService{
     return sport.snapshots().map(_noticeListFromSnapshot);
   } 
   Stream<List<Notice>>get generalnotices{
-    return general.snapshots().map(_noticeListFromSnapshot);
+    return all.snapshots().map(_noticeListFromSnapshot);
   } 
-  
+
+  //exams streams
+  Stream<List<Notice>>get cisexam{
+    return cisexams.snapshots().map(_noticeListFromSnapshot);
+  } 
+  Stream<List<Notice>>get pstexam{
+    return pstexams.snapshots().map(_noticeListFromSnapshot);
+  } 
+  Stream<List<Notice>>get nrexam{
+    return nrexams.snapshots().map(_noticeListFromSnapshot);
+  } 
+  Stream<List<Notice>>get fstexam{
+    return fstexams.snapshots().map(_noticeListFromSnapshot);
+  } 
+  Stream<List<Notice>>get sportexam{
+    return sportexams.snapshots().map(_noticeListFromSnapshot);
+  }
+  //mahapola/bursary streams
+  Stream<List<Notice>>get cismb{
+    return cisMB.snapshots().map(_noticeListFromSnapshot);
+  } 
+  Stream<List<Notice>>get nrmb{
+    return nrMB.snapshots().map(_noticeListFromSnapshot);
+  } 
+  Stream<List<Notice>>get fstmb{
+    return fstMB.snapshots().map(_noticeListFromSnapshot);
+  } 
+  Stream<List<Notice>>get pstmb{
+    return pstMB.snapshots().map(_noticeListFromSnapshot);
+  } 
+  Stream<List<Notice>>get sportmb{
+    return sportMB.snapshots().map(_noticeListFromSnapshot);
+  } 
+   
+  //nr streams
+Stream<List<Notice>>get cistt{
+    return cistimetables.snapshots().map(_noticeListFromSnapshot);
+  } 
+  Stream<List<Notice>>get nrtt{
+    return nrtimetables.snapshots().map(_noticeListFromSnapshot);
+  } 
+  Stream<List<Notice>>get fsttt{
+    return fsttimetables.snapshots().map(_noticeListFromSnapshot);
+  } 
+  Stream<List<Notice>>get psttt{
+    return psttimetables.snapshots().map(_noticeListFromSnapshot);
+  } 
+  Stream<List<Notice>>get sporttt{
+    return sporttimetables.snapshots().map(_noticeListFromSnapshot);
+  } 
+
+  //pst streams
+Stream<List<Notice>>get cisres{
+    return cisresults.snapshots().map(_noticeListFromSnapshot);
+  } 
+  Stream<List<Notice>>get nrres{
+    return nrresults.snapshots().map(_noticeListFromSnapshot);
+  } 
+  Stream<List<Notice>>get fstres{
+    return fstresults.snapshots().map(_noticeListFromSnapshot);
+  } 
+  Stream<List<Notice>>get pstres{
+    return pstresults.snapshots().map(_noticeListFromSnapshot);
+  } 
+  Stream<List<Notice>>get sportres{
+    return sportresults.snapshots().map(_noticeListFromSnapshot);
+  } 
+ 
+  //sport streams
+Stream<List<Notice>>get cisothers{
+    return cisother.snapshots().map(_noticeListFromSnapshot);
+  } 
+  Stream<List<Notice>>get nrothers{
+    return nrother.snapshots().map(_noticeListFromSnapshot);
+  } 
+  Stream<List<Notice>>get fstothers{
+    return fstother.snapshots().map(_noticeListFromSnapshot);
+  } 
+  Stream<List<Notice>>get pstothers{
+    return pstother.snapshots().map(_noticeListFromSnapshot);
+  } 
+  Stream<List<Notice>>get sportothers{
+    return sportother.snapshots().map(_noticeListFromSnapshot);
+  } 
+  //all streams
+  Stream<List<Notice>>get allexam{
+    return allexams.snapshots().map(_noticeListFromSnapshot);
+  } 
+  Stream<List<Notice>>get allothers{
+    return allother.snapshots().map(_noticeListFromSnapshot);
+  } 
+  Stream<List<Notice>>get allmb{
+    return allMB.snapshots().map(_noticeListFromSnapshot);
+  } 
+  Stream<List<Notice>>get allresult{
+    return allresults.snapshots().map(_noticeListFromSnapshot);
+  } 
+  Stream<List<Notice>>get alltimetable{
+    return alltimetables.snapshots().map(_noticeListFromSnapshot);
+  }
+ 
   //get notice doc stream
   Stream<NoticeData>get noticeData{
     return noticeCollection.document().snapshots()

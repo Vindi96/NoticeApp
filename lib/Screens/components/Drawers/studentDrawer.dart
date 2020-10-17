@@ -99,7 +99,7 @@ class _DrawerpartState extends State<Drawerpart> {
               ),
               tabs(icon:Icon(Icons.home),name:'StudentHome'),
               tabs(icon:Icon(Icons.account_circle),name:'My Account'),
-              tabs(icon:Icon(Icons.developer_board),name:'View Notices'),
+              tabs(icon:Icon(Icons.developer_board),name:'SeeNotices'),
               tabs(icon:Icon(Icons.settings),name:'Settings'),
              // tabs(icon:Icon(Icons.help),name:'About'),
               InkWell(
