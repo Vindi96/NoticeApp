@@ -59,17 +59,8 @@ class _HodHomePageState extends State<HodHomePage> {
       body: ListView(
         children: <Widget>[
           imageCarousel,
-           Padding(padding:const EdgeInsets.all(10.0),
-           child:Text('Departments',style:TextStyle(
-             fontSize: 15.0,
-             color: Colors.blue[700],
-             fontFamily: 'montserrat',
-             fontWeight: FontWeight.bold
-             ),
-             
-             ),           
-           ),
-           HorizontalList(),
+           
+          
            Padding(padding: const EdgeInsets.all(10.0),
            child:Text('Recent',style:TextStyle(
              fontSize: 15.0,
