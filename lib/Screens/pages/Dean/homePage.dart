@@ -55,10 +55,7 @@ import 'package:facultynoticeboard/Screens/components/horisontal_listview.dart';
        drawer:AdminDrawerpart(),
        body: ListView(
          children:<Widget>[
-           imageCarousel,
-                     
-           
-           
+           imageCarousel, 
            Padding(padding: const EdgeInsets.all(10.0),
            child:Text('Recent',style:TextStyle(
              fontSize: 15.0,
