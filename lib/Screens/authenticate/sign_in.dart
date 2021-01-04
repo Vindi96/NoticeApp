@@ -1,3 +1,4 @@
+import 'package:facultynoticeboard/Screens/authenticate/resetpass.dart';
 import 'package:facultynoticeboard/Services/auth.dart';
 import 'package:facultynoticeboard/Shared/loading.dart';
 
@@ -63,7 +64,9 @@ class _SignInState extends State<SignIn> {
                               fontWeight: FontWeight.bold),
                         ),
                       ),
-                      onPressed: () {},
+                      onPressed: () => Navigator.of(context).push(
+                  MaterialPageRoute(builder: (context) => ResetScreen()),
+                ),
                     ),
                     SizedBox(height: 55.0),
                     SizedBox(

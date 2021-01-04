@@ -52,6 +52,9 @@ class AuthService{
       return null;
     }
   }
+  //reset password
+
+  
 
   //sign out
   Future signOut()async{

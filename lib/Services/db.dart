@@ -2,6 +2,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:facultynoticeboard/Models/model.dart';
 import 'package:facultynoticeboard/Models/notice.dart';
 import 'package:facultynoticeboard/Screens/components/unapprovednotices.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 
 class UserService{
   
@@ -58,6 +59,10 @@ class UserService{
     QuerySnapshot qn = await firestore.collection('Users').getDocuments();
     return qn.documents;
   }
+  // get current user
+  Future getcurentuser()async{
+    return await FirebaseAuth.instance.currentUser();
+  }
  
  //get user stream
   Stream<List<User>>get users{
@@ -112,22 +117,22 @@ class NoticeService{
 
   //approved notices
   final Query cis = Firestore.instance.collection('Notices')
-  .where("status",isEqualTo:"approved").where('department',isEqualTo:'cis')
+  .where("status",isEqualTo:"approved").where('department',isEqualTo:'cis').limit(10)
   .orderBy("dateTime",descending:true);
   final Query nr = Firestore.instance.collection('Notices')
-  .where("status",isEqualTo:"approved").where('department',isEqualTo:'nr')
+  .where("status",isEqualTo:"approved").where('department',isEqualTo:'nr').limit(10)
   .orderBy("dateTime",descending:true);
   final Query sport = Firestore.instance.collection('Notices')
-  .where("status",isEqualTo:"approved").where('department',isEqualTo:'sport')
+  .where("status",isEqualTo:"approved").where('department',isEqualTo:'sport').limit(10)
   .orderBy("dateTime",descending:true);
   final Query pst = Firestore.instance.collection('Notices')
-  .where("status",isEqualTo:"approved").where('department',isEqualTo:'pst')
+  .where("status",isEqualTo:"approved").where('department',isEqualTo:'pst').limit(10)
   .orderBy("dateTime",descending:true);
   final Query fst = Firestore.instance.collection('Notices')
-  .where("status",isEqualTo:"approved").where('department',isEqualTo:'fst')
+  .where("status",isEqualTo:"approved").where('department',isEqualTo:'fst').limit(10)
   .orderBy("dateTime",descending:true);
   final Query all = Firestore.instance.collection('Notices')
-  .where("status",isEqualTo:"approved").where('department',isEqualTo:'all')
+  .where("status",isEqualTo:"approved").where('department',isEqualTo:'all').limit(10)
   .orderBy("dateTime",descending:true);
 
   //cis categories
